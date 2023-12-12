@@ -161,6 +161,9 @@ public class PgConnection implements BaseConnection {
 
   private boolean disableColumnSanitiser = false;
 
+  // Default state of JDBC escape processing
+  private boolean defaultEscapeProcessingEnabled = true;
+
   // Default statement prepare threshold.
   protected int prepareThreshold;
 
@@ -218,7 +221,7 @@ public class PgConnection implements BaseConnection {
 
   private CachedQuery borrowReturningQuery(String sql, String @Nullable [] columnNames)
       throws SQLException {
-    return queryExecutor.borrowReturningQuery(sql, columnNames);
+    return queryExecutor.borrowReturningQuery(sql, defaultEscapeProcessingEnabled, true, columnNames);
   }
 
   @Override
@@ -258,6 +261,8 @@ public class PgConnection implements BaseConnection {
     if (prepareThreshold == -1) {
       setForceBinary(true);
     }
+
+    setDefaultEscapeProcessingEnabled(PGProperty.ESCAPE_PROCESSING.getBoolean(info));
 
     // Now make the initial connection and set up local state
     this.queryExecutor = ConnectionFactory.openConnection(hostSpecs, info);
@@ -1287,6 +1292,15 @@ public class PgConnection implements BaseConnection {
   public void setDisableColumnSanitiser(boolean disableColumnSanitiser) {
     this.disableColumnSanitiser = disableColumnSanitiser;
     LOGGER.log(Level.FINE, "  setDisableColumnSanitiser = {0}", disableColumnSanitiser);
+  }
+
+  public boolean isDefaultEscapeProcessingEnabled() {
+    return this.defaultEscapeProcessingEnabled;
+  }
+
+  public void setDefaultEscapeProcessingEnabled(boolean enableEscapeProcessing) {
+    this.defaultEscapeProcessingEnabled = enableEscapeProcessing;
+    LOGGER.log(Level.FINE, "  setDefaultEscapeProcessingEnabled = {0}", enableEscapeProcessing);
   }
 
   @Override

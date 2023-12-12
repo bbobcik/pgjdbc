@@ -252,6 +252,8 @@ public interface QueryExecutor extends TypeTransferModeRegistry {
 
   CachedQuery borrowReturningQuery(String sql, String @Nullable [] columnNames) throws SQLException;
 
+  CachedQuery borrowReturningQuery(String sql, boolean escapeProcessing, boolean isParameterized, String @Nullable [] columnNames) throws SQLException;
+
   void releaseQuery(CachedQuery cachedQuery);
 
   /**

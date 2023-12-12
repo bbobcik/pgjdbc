@@ -13,6 +13,9 @@ these escape sequences into native syntax for its specific database. For more in
 [Java DB Technical Documentation](http://docs.oracle.com/javadb/10.10.1.2/ref/rrefjdbc1020262.html).
 
 The parsing of the sql statements for these escapes can be disabled using `Statement.setEscapeProcessing(false)` .
+The default state of JDBC processing can be controlled by setting DataSource or Connection property `escapeProcessing` 
+or by calling `PgConnection.setDefaultEscapeProcessingEnabled()`. The default state is important for prepared statements,
+as their parsing is done at the time of creation and subsequent call to `setEscapeProcessing()` will have no effect.
 
 `Connection.nativeSQL(String sql)` provides another way to have escapes processed. It translates the given SQL to SQL
 suitable for the PostgreSQL® backend.

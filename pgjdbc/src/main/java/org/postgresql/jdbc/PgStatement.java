@@ -163,6 +163,7 @@ public class PgStatement implements Statement, BaseStatement {
     setFetchSize(c.getDefaultFetchSize());
     setPrepareThreshold(c.getPrepareThreshold());
     setAdaptiveFetch(c.getAdaptiveFetch());
+    setEscapeProcessing(c.isDefaultEscapeProcessingEnabled());
     this.rsHoldability = rsHoldability;
   }
 

@@ -333,9 +333,14 @@ public abstract class QueryExecutorBase implements QueryExecutor {
   @Override
   public final CachedQuery borrowReturningQuery(String sql, String @Nullable [] columnNames)
       throws SQLException {
-    return statementCache.borrow(new QueryWithReturningColumnsKey(sql, true, true,
-        columnNames
-    ));
+    return borrowReturningQuery(sql, true, true, columnNames);
+  }
+
+  @Override
+  public final CachedQuery borrowReturningQuery(String sql, boolean escapeProcessing, boolean isParameterized, String @Nullable [] columnNames)
+      throws SQLException {
+    final QueryWithReturningColumnsKey queryKey = new QueryWithReturningColumnsKey(sql, isParameterized, escapeProcessing, columnNames);
+    return statementCache.borrow(queryKey);
   }
 
   @Override

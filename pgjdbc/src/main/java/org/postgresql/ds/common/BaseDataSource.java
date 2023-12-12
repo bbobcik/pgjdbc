@@ -1731,6 +1731,22 @@ public abstract class BaseDataSource implements CommonDataSource, Referenceable 
     PGProperty.XML_FACTORY_FACTORY.set(properties, xmlFactoryFactory);
   }
 
+  /**
+   * @return boolean indicating property is enabled or not.
+   * @see PGProperty#ESCAPE_PROCESSING
+   */
+  public boolean getEscapeProcessing() {
+    return PGProperty.ESCAPE_PROCESSING.getBoolean(properties);
+  }
+
+  /**
+   * @param escapeProcessing boolean value to set the property in the properties collection
+   * @see PGProperty#ESCAPE_PROCESSING
+   */
+  public void setEscapeProcessing(boolean escapeProcessing) {
+    PGProperty.ESCAPE_PROCESSING.set(properties, escapeProcessing);
+  }
+
   /*
    * Alias methods below, these are to help with ease-of-use with other database tools / frameworks
    * which expect normal java bean getters / setters to exist for the property names.
@@ -1847,4 +1863,9 @@ public abstract class BaseDataSource implements CommonDataSource, Referenceable 
   public boolean isReWriteBatchedInserts() {
     return getReWriteBatchedInserts();
   }
+
+  public boolean isEscapeProcessing() {
+    return getEscapeProcessing();
+  }
+
 }

@@ -433,6 +433,12 @@ If we quote them, then we end up sending ""colname"" to the backend instead of "
 Fully qualified class name of the class implementing the AuthenticationPlugin interface. If this is null, the password 
 value in the connection properties will be used.
 
+* **`escapeProcessing (`*boolean*`)`** *Default `true`*\
+Specifies if the driver parses JDBC escapes in statement query text by default.
+This behaviour can be controlled by calling `Statement.setEscapeProcessing()` on a per-statement basis,
+but construction of prepared statements relies on this default. If this property is set to `false`,
+the query text is sent to the database as-is.
+
 ### Unix sockets
 
 By adding junixsocket you can obtain a socket factory that works with the driver.

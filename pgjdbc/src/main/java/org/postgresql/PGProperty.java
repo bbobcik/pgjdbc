@@ -208,6 +208,16 @@ public enum PGProperty {
       "Enable optimization that disables column name sanitiser"),
 
   /**
+   * Default parameter for {@link java.sql.Statement#setEscapeProcessing(boolean)}. A value of {@code true} (default)
+   * means that the driver tries to expand JDBC escape sequences present in the query text.
+   * A value of {@code false} means that the query text is sent to the database as-is.
+   */
+  ESCAPE_PROCESSING(
+      "escapeProcessing",
+      "true",
+      "Enable or disable processing of JDBC escape sequences"),
+
+  /**
    * Specifies how the driver transforms JDBC escape call syntax into underlying SQL, for invoking procedures or functions. (backend &gt;= 11)
    * In {@code escapeSyntaxCallMode=select} mode (the default), the driver always uses a SELECT statement (allowing function invocation only).
    * In {@code escapeSyntaxCallMode=callIfNoReturn} mode, the driver uses a CALL statement (allowing procedure invocation) if there is no return parameter specified, otherwise the driver uses a SELECT statement.

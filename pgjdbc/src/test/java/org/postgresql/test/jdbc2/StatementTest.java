@@ -466,6 +466,11 @@ public class StatementTest {
   }
 
   @Test
+  public void testDisabledEscapeProcessing() {
+
+  }
+
+  @Test
   public void testWarningsAreCleared() throws SQLException {
     Statement stmt = con.createStatement();
     // Will generate a NOTICE: for primary key index creation
